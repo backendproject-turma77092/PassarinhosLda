@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Documentação da API</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+      .section {
+        background-color: #fff;
+        margin: 10px;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        background-color: #3498db;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        background-color: #fff;
+        margin: 10px;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      li::before {
+        content: "\2713";
+        color: green;
+        font-size: 20px;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Enunciado Projeto BackEnd Flag</h1>
+
+    <div class="section">
+      Com a velocidade requerida pelos negócios dos novos tempos, cada vez mais
+      temos assistido a uma digitalização de negócios mais tradicionais, como
+      por exemplo a gestão de stocks.
+    </div>
+    <div class="section">
+      Propomos-lhe o desafio de desenvolver o backend de um software de
+      logística do armazém Pombo e Filhos lda.
+    </div>
+    <div class="section">
+      A empresa Pombo e Filhos lda procede à compra e venda de material
+      eletrónico e de iluminação. Os artigos adquiridos são guardados em
+      armazém.
+    </div>
+    <div class="section">
+      O software a desenvolver deverá permitir:
+      <ul>
+        <li>
+          Gestão de fornecedores, tendo a noção de ficha de fornecedor tendo a
+          noção de produtos fornecidos.
+        </li>
+        <li>
+          Gestão de Clientes, tendo noção de ficha de cliente e produtos
+          adquiridos pelo mesmo.
+        </li>
+        <li>Gestão de stocks de produtos em armazém.</li>
+        <li>Consulta de stock de determinado produto.</li>
+        <li>Datas de envio de encomendas.</li>
+      </ul>
+    </div>
+    <div class="section">
+      Questões a resolver:
+      <ul>
+        <li>
+          1- Tendo em conta as matérias apreendidas nos módulos de bases de
+          dados, desenhe e justifique em relatório escrito a base de dados que
+          pretende construir para dar suporte a este projeto. Ilustre através
+          dos diagramas de Modelo Entidade Associação e modelos relacionais.
+        </li>
+        <li>
+          2- Implemente o sistema para dar suporte ao desafio proposto,
+          considerando que o projeto visa a componente de Backend. Poderá criar
+          uma WEBAPI para o efeito ou construir recorrendo a Laravel/PHP/outra
+          tecnologia abordada no curso o sistema pedido.
+        </li>
+      </ul>
+    </div>
+    <h1>Solução Projeto BackEnd Flag</h1>
+    <ul>
+      <% endpoints.forEach(function(endpoint) { %>
+      <li>
+        <strong><%= endpoint.name %></strong>: <%= endpoint.description %>
+      </li>
+      <% }); %>
+    </ul>
+  </body>
+</html>
