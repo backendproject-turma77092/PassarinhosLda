@@ -1,17 +1,15 @@
 "use strict";
 const { Model } = require("sequelize");
-
 module.exports = (sequelize, DataTypes) => {
-  class user extends Model {
+  class gestor extends Model {
     static associate(models) {
-      user.belongsTo(models.usertype, {
+      gestor.belongsTo(models.usertype, {
         foreignKey: "userTypeId",
         as: "usertype",
       });
     }
   }
-
-  user.init(
+  gestor.init(
     {
       username: DataTypes.STRING,
       password: DataTypes.INTEGER,
@@ -25,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "user",
+      modelName: "gestor",
     }
   );
-  return user;
+  return gestor;
 };

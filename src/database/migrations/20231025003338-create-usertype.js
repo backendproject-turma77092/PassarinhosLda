@@ -12,13 +12,6 @@ module.exports = {
       nome: {
         type: Sequelize.STRING,
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "users",
-          key: "id",
-        },
-      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),

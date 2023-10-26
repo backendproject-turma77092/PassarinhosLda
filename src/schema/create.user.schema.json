@@ -2,10 +2,10 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://example.com/user.schema.json",
     "title": "CreateUserSchema",
-    "description": "userlogin",
+    "description": "registro",
     "type": "object",
     "properties": {
-        "name": {
+        "username": {
             "type": "string"
         },
         "email": {
@@ -13,11 +13,35 @@
         },
         "password": {
             "type": "string"
+        },
+        "morada": {
+            "type": "string"
+        },
+        "nif": {
+            "type": "integer"
+        },
+        " telefone": {
+            "type": "integer"
+        },
+        " userTypeId": {
+            "type": "integer"
+        },
+        "localidade": {
+            "type": "string"
+        },
+        "codigoPostal": {
+            "type": "integer"
         }
     },
     "required": [
-        "name",
+        "username",
         "email",
-        "password"
+        "password",
+        "codigoPostal",
+        "userTypeId",
+        "telefone",
+        "morada",
+        "localidade",
+        "nif"
     ]
 }

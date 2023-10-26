@@ -1,17 +1,15 @@
 "use strict";
 const { Model } = require("sequelize");
-
 module.exports = (sequelize, DataTypes) => {
-  class user extends Model {
+  class plataforma extends Model {
     static associate(models) {
-      user.belongsTo(models.usertype, {
+      plataforma.belongsTo(models.usertype, {
         foreignKey: "userTypeId",
         as: "usertype",
       });
     }
   }
-
-  user.init(
+  plataforma.init(
     {
       username: DataTypes.STRING,
       password: DataTypes.INTEGER,
@@ -25,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "user",
+      modelName: "plataforma",
     }
   );
-  return user;
+  return plataforma;
 };
