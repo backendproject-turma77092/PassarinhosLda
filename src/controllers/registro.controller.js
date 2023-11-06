@@ -23,7 +23,9 @@ class IndexController {
         localidade,
         codigoPostal,
         userTypeId,
+        tipopagamentoId,
         password,
+        statusId,
       } = req.body;
 
       const [
@@ -31,6 +33,9 @@ class IndexController {
         fornecedoresResult,
         transportadoraResult,
         clientesResult,
+        gestorResult,
+        fielarmazemResult,
+        plataformaResult,
       ] = await Promise.all([
         user.findOne({ where: { email } }),
         fornecedores.findOne({ where: { email } }),
@@ -45,7 +50,10 @@ class IndexController {
         userResult ||
         fornecedoresResult ||
         transportadoraResult ||
-        clientesResult
+        clientesResult ||
+        gestorResult ||
+        fielarmazemResult ||
+        plataformaResult
       ) {
         return res.status(409).json({ error: "Email already in use" });
       }
@@ -63,6 +71,8 @@ class IndexController {
             localidade,
             codigoPostal,
             userTypeId,
+            tipopagamentoId,
+            statusId,
             password: hashedPassword,
           });
           break;
@@ -76,6 +86,8 @@ class IndexController {
             localidade,
             codigoPostal,
             userTypeId,
+            tipopagamentoId,
+            statusId,
             password: hashedPassword,
           });
           break;
@@ -89,8 +101,11 @@ class IndexController {
             localidade,
             codigoPostal,
             userTypeId,
+            tipopagamentoId,
+            statusId,
             password: hashedPassword,
           });
+          break;
         case 4:
           newUser = await transportadora.create({
             username,
@@ -101,6 +116,8 @@ class IndexController {
             localidade,
             codigoPostal,
             userTypeId,
+            tipopagamentoId,
+            statusId,
             password: hashedPassword,
           });
           break;
@@ -115,6 +132,8 @@ class IndexController {
             localidade,
             codigoPostal,
             userTypeId,
+            tipopagamentoId,
+            statusId,
             password: hashedPassword,
           });
           break;
@@ -128,6 +147,8 @@ class IndexController {
             localidade,
             codigoPostal,
             userTypeId,
+            tipopagamentoId,
+            statusId,
             password: hashedPassword,
           });
           break;

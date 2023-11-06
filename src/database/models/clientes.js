@@ -7,6 +7,15 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userTypeId",
         as: "usertype",
       });
+
+      clientes.belongsTo(models.tipopagamento, {
+        foreignKey: "tipopagamentoId",
+        as: "tipopagamento",
+      });
+      clientes.belongsTo(models.status, {
+        foreignKey: "statusId",
+        as: "statuses",
+      });
     }
   }
   clientes.init(
@@ -20,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       localidade: DataTypes.STRING,
       codigoPostal: DataTypes.INTEGER,
       userTypeId: DataTypes.INTEGER,
+      tipopagamentoId: DataTypes.INTEGER,
+      statusId: DataTypes.INTEGER,
     },
     {
       sequelize,

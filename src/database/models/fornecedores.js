@@ -7,6 +7,21 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userTypeId",
         as: "usertype",
       });
+
+      fornecedores.belongsToMany(models.artigos, {
+        through: "fornecedorartigo",
+        foreignKey: "fornecedorId",
+        otherKey: "artigoId",
+      });
+
+      fornecedores.belongsTo(models.tipopagamento, {
+        foreignKey: "tipopagamentoId",
+        as: "tipopagamento",
+      });
+      fornecedores.belongsTo(models.status, {
+        foreignKey: "statusId",
+        as: "statuses",
+      });
     }
   }
   fornecedores.init(
@@ -20,6 +35,8 @@ module.exports = (sequelize, DataTypes) => {
       localidade: DataTypes.STRING,
       codigoPostal: DataTypes.INTEGER,
       userTypeId: DataTypes.INTEGER,
+      tipopagamentoId: DataTypes.INTEGER,
+      statusId: DataTypes.INTEGER,
     },
     {
       sequelize,

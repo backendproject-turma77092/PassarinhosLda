@@ -48,6 +48,13 @@ module.exports = {
           key: "id",
         },
       },
+      tipodepagamentoId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "tipodepagemnto",
+          key: "id",
+        },
+      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
