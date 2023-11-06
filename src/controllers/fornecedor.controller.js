@@ -57,27 +57,29 @@ class FornecerdorController {
   async findFornecedorById(req, res) {
     try {
       const { id } = req.params;
-      const cliente = await fornecedores.findByPk(id);
-      if (!cliente) {
+      const fornecedor = await fornecedores.findByPk(id);
+      if (!fornecedor) {
         return res.status(404).json({ message: "ID não encontrado." });
       }
-      res.status(200).json({ cliente });
+      res.status(200).json({ fornecedor });
     } catch (error) {
-      console.error("Erro ao carregar clientes:", error);
-      res.status(500).json({ error: "Ocorreu um erro ao carregar o cliente." });
+      console.error("Erro ao carregar fornecedores:", error);
+      res
+        .status(500)
+        .json({ error: "Ocorreu um erro ao carregar o fornecedor." });
     }
   }
   async updateFornecedor(req, res) {
     const { email } = req.body;
-    const cliente = await fornecedores.findByPk(req.params.id);
-    if (!cliente) {
+    const fornecedor = await fornecedores.findByPk(req.params.id);
+    if (!fornecedor) {
       return res.status(404).json({ error: "Fornecedor não encontrado" });
     }
     const existingFornecedor = await fornecedores.findOne({
       where: {
         email,
         id: {
-          [Sequelize.Op.not]: cliente.id,
+          [Sequelize.Op.not]: fornecedor.id,
         },
       },
     });
@@ -86,8 +88,8 @@ class FornecerdorController {
         .status(400)
         .json({ error: "Email já está em uso por outro Fornecedor" });
     }
-    await cliente.update(req.body);
-    return res.status(200).json(cliente);
+    await fornecedor.update(req.body);
+    return res.status(200).json(fornecedor);
   }
   async desativarFornecedor(req, res) {
     const fornecedor = await fornecedores.findByPk(req.params.id);
