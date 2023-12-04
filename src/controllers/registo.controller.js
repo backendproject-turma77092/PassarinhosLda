@@ -23,9 +23,7 @@ class IndexController {
         localidade,
         codigoPostal,
         userTypeId,
-        tipopagamentoId,
         password,
-        statusId,
       } = req.body;
 
       const [
@@ -55,7 +53,7 @@ class IndexController {
         fielarmazemResult ||
         plataformaResult
       ) {
-        return res.status(409).json({ error: "Email already in use" });
+        return res.status(409).json({ error: "Email já existente" });
       }
       const hashedPassword = await bcrypt.hash(password, encrypt);
       let newUser;
@@ -71,8 +69,8 @@ class IndexController {
             localidade,
             codigoPostal,
             userTypeId,
-            tipopagamentoId,
-            statusId,
+            tipopagamentoId: 1,
+            statusId: 1,
             password: hashedPassword,
           });
           break;
@@ -153,10 +151,10 @@ class IndexController {
           });
           break;
         default:
-          return res.status(400).json({ error: "Tipo de associação inválida" });
+          return res.status(400).json({ error: "Usertype invalido " });
       }
 
-      res.status(201).json(newUser);
+      res.status(201).json({ message: "User Criado com sucesso" });
     } catch (error) {
       console.error(error);
       res.status(500).json({

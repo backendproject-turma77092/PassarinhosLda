@@ -3,20 +3,30 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class artigos extends Model {
     static associate(models) {
-      artigos.belongsToMany(models.fornecedores, {
-        through: "fornecedorartigo",
+      artigos.belongsTo(models.fornecedores, {
+        foreignKey: "fornecedorId",
+        as: "fornecedor",
+      });
+      artigos.belongsToMany(models.Armazem, {
+        through: "ArtigoArmazem",
+        as: "armazens",
         foreignKey: "artigoId",
-        otherKey: "fornecedorId",
+        otherKey: "armazemId",
+      });
+      artigos.belongsToMany(models.Encomenda, {
+        through: "EncomendaArtigos",
+        as: "encomendas",
+        foreignKey: "artigoId",
+        otherKey: "encomendaId",
       });
     }
   }
   artigos.init(
     {
       nome: DataTypes.STRING,
-      numeroserie: DataTypes.INTEGER,
-      tipo: DataTypes.INTEGER,
-      preco: DataTypes.INTEGER,
-      codigo: DataTypes.INTEGER,
+      descricao: DataTypes.TEXT,
+      preco: DataTypes.DECIMAL(10, 2),
+      fornecedorId: DataTypes.INTEGER,
     },
     {
       sequelize,

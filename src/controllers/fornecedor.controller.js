@@ -3,6 +3,7 @@ const {
   tipopagamento,
   status,
   usertype,
+  transportadora,
 } = require("../database/models");
 const { Sequelize } = require("sequelize");
 class FornecerdorController {
@@ -54,43 +55,56 @@ class FornecerdorController {
         .json({ error: "Ocorreu um erro ao carregar os Fornecedores." });
     }
   }
-  async findFornecedorById(req, res) {
+
+  //aqui e transferido por token uuid :)
+  async findFornecedorByToken(req, res) {
     try {
-      const { id } = req.params;
-      const fornecedor = await fornecedores.findByPk(id);
-      if (!fornecedor) {
-        return res.status(404).json({ message: "ID não encontrado." });
+      const userResult = req.user;
+
+      if (!userResult) {
+        return res.status(404).json({ message: "perfil não encontrado." });
       }
-      res.status(200).json({ fornecedor });
+
+      res.status(200).json({ perfil: userResult });
     } catch (error) {
-      console.error("Erro ao carregar fornecedores:", error);
-      res
-        .status(500)
-        .json({ error: "Ocorreu um erro ao carregar o fornecedor." });
+      console.error("Erro ao carregar perfil:", error);
+      res.status(500).json({ error: "Ocorreu um erro ao carregar o  perfil." });
     }
   }
-  async updateFornecedor(req, res) {
-    const { email } = req.body;
-    const fornecedor = await fornecedores.findByPk(req.params.id);
-    if (!fornecedor) {
-      return res.status(404).json({ error: "Fornecedor não encontrado" });
-    }
-    const existingFornecedor = await fornecedores.findOne({
-      where: {
-        email,
-        id: {
-          [Sequelize.Op.not]: fornecedor.id,
+
+  async updatePerfilFornecedor(req, res) {
+    try {
+      // Fornecedor autenticado do middleware Passport
+      const fornecedorAutenticado = req.user;
+
+      if (!fornecedorAutenticado) {
+        return res.status(404).json({ error: "Fornecedor não encontrado" });
+      }
+
+      const { email } = req.body;
+      const existingFornecedor = await fornecedores.findOne({
+        where: {
+          email,
+          id: {
+            [Sequelize.Op.not]: fornecedorAutenticado.id,
+          },
         },
-      },
-    });
-    if (existingFornecedor) {
-      return res
-        .status(400)
-        .json({ error: "Email já está em uso por outro Fornecedor" });
+      });
+
+      if (existingFornecedor) {
+        return res
+          .status(400)
+          .json({ error: "Email já está em uso por outro fornecedor" });
+      }
+
+      await fornecedorAutenticado.update(req.body);
+      return res.status(200).json(fornecedorAutenticado);
+    } catch (error) {
+      console.error("Erro ao atualizar perfil do fornecedor:", error);
+      res.status(500).json({ error: "Erro interno do servidor" });
     }
-    await fornecedor.update(req.body);
-    return res.status(200).json(fornecedor);
   }
+
   async desativarFornecedor(req, res) {
     const fornecedor = await fornecedores.findByPk(req.params.id);
     if (fornecedor) {

@@ -1,18 +1,28 @@
 "use strict";
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
-  class armazem extends Model {
-    static associate(models) {}
+  class Armazem extends Model {
+    static associate(models) {
+      Armazem.belongsToMany(models.artigos, {
+        through: "ArtigoArmazem",
+        as: "artigos",
+        foreignKey: "armazemId",
+        otherKey: "artigoId",
+      });
+    }
   }
-  armazem.init(
+  Armazem.init(
     {
-      morada: DataTypes.STRING,
       nome: DataTypes.STRING,
+      localizacao: DataTypes.STRING,
     },
     {
       sequelize,
-      modelName: "armazem",
+      modelName: "Armazem",
+      tableName: "Armazem",
+      freezeTableName: true,
     }
   );
-  return armazem;
+  return Armazem;
 };

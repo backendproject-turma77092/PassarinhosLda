@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "statusId",
         as: "statuses",
       });
+      clientes.hasMany(models.Encomenda, {
+        foreignKey: "clienteId",
+        as: "encomendas",
+      });
     }
   }
   clientes.init(
@@ -31,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       userTypeId: DataTypes.INTEGER,
       tipopagamentoId: DataTypes.INTEGER,
       statusId: DataTypes.INTEGER,
+      tokenIdentifier: DataTypes.UUID,
     },
     {
       sequelize,

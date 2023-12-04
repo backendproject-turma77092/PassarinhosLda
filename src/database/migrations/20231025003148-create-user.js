@@ -48,10 +48,17 @@ module.exports = {
           key: "id",
         },
       },
-      tipodepagamentoId: {
+      tipopagamentoId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "tipodepagemnto",
+          model: "tipopagamentos",
+          key: "id",
+        },
+      },
+      statusId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "statuses",
           key: "id",
         },
       },

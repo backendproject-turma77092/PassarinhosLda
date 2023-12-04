@@ -12,17 +12,20 @@ module.exports = {
       nome: {
         type: Sequelize.STRING,
       },
-      codigo: {
-        type: Sequelize.INTEGER,
-      },
-      numeroserie: {
-        type: Sequelize.INTEGER,
-      },
-      tipo: {
-        type: Sequelize.STRING,
+      descricao: {
+        type: Sequelize.TEXT,
       },
       preco: {
+        type: Sequelize.DECIMAL(10, 2),
+      },
+      fornecedorId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: "Fornecedores",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       createdAt: {
         allowNull: false,

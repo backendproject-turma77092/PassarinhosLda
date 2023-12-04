@@ -3,8 +3,13 @@ const {
   tipopagamento,
   status,
   usertype,
+  Encomenda,
+  artigos,
+  Armazem,
+  transportadora,
 } = require("../database/models");
 const { Sequelize } = require("sequelize");
+
 class ClientesController {
   async getAll(req, res) {
     try {
@@ -114,6 +119,48 @@ class ClientesController {
       res.status(200).json({ message: "Cliente removido com sucesso" });
     } else {
       res.status(404).json({ error: "Cliente nao encontrado" });
+    }
+  }
+  //novas
+
+  async getClienteComEncomendas(req, res) {
+    const clienteId = req.params.clienteId;
+    console.log(clienteId);
+    try {
+      const cliente = await clientes.findByPk(clienteId, {
+        include: [
+          {
+            model: Encomenda,
+            as: "encomendas",
+            include: [
+              {
+                model: transportadora,
+                as: "transportadora",
+              },
+              {
+                model: artigos,
+                as: "artigos",
+                include: [
+                  {
+                    model: Armazem,
+                    as: "armazens",
+                  },
+                ],
+                through: { attributes: [] },
+              },
+            ],
+          },
+        ],
+      });
+
+      if (!cliente) {
+        return res.status(404).json({ message: "Cliente não encontrado." });
+      }
+
+      res.status(200).json(cliente);
+    } catch (error) {
+      console.error("Erro ao buscar cliente e encomendas:", error);
+      res.status(500).json({ message: "Erro ao processar a solicitação." });
     }
   }
 }

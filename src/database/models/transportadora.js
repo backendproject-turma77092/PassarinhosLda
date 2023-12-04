@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userTypeId",
         as: "usertype",
       });
+      transportadora.hasMany(models.Encomenda, {
+        foreignKey: "transportadoraId",
+        as: "encomendas",
+      });
     }
   }
   transportadora.init(
@@ -20,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       localidade: DataTypes.STRING,
       codigoPostal: DataTypes.INTEGER,
       userTypeId: DataTypes.INTEGER,
+      tokenIdentifier: DataTypes.STRING,
     },
     {
       sequelize,
