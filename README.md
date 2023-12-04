@@ -22,11 +22,11 @@
 
 ## Dificuldades e Melhoramentos.
 
-1- O Sequelize, um ORM (Object-Relational Mapper) popular para Node.js, segue uma convenção de nomenclatura que cria automaticamente nomes de tabelas no plural. Esta é uma prática comum em muitos ORMs e frameworks, pois segue a convenção de que uma tabela, que geralmente armazena múltiplos registros, deve ter um nome que reflete seu conteúdo como uma coleção de entidades, que é mais naturalmente expresso no plural.
-Daí muitas das minha tabelas serem no plurar .
-2- Nome das funções ainda em aprendizagem da minha dificuldade, em Ingles ou Portuges.
-3- Escolha de ter um uuid tambem foi um dos problemas a implementar.
-4- Com as dificuladades encontradas viso meu melhoramento em termos de codigo nomes e funções .
+- O Sequelize, um ORM (Object-Relational Mapper) popular para Node.js, segue uma convenção de nomenclatura que cria automaticamente nomes de tabelas no plural. Esta é uma prática comum em muitos ORMs e frameworks, pois segue a convenção de que uma tabela, que geralmente armazena múltiplos registros, deve ter um nome que reflete seu conteúdo como uma coleção de entidades, que é mais naturalmente expresso no plural.
+  Daí muitas das minha tabelas serem no plurar .
+- Nome das funções ainda em aprendizagem da minha dificuldade, em Ingles ou Portuges.
+- Escolha de ter um uuid tambem foi um dos problemas a implementar.
+- Com as dificuladades encontradas viso meu melhoramento em termos de codigo nomes e funções .
 
 ## Apresentação do Projecto
 
@@ -47,23 +47,23 @@ Gestão de Artigos e Encomendas: Permite o registo e a consulta de artigos, incl
 ## Requisitos
 
 - Tecnologias Usadas :
-  faker-js/faker": "^8.2.0
-  bcrypt": "^5.1.1
-  chart.js": "^4.4.0
-  cors": "^2.8.5
-  dotenv": "^16.3.1
-  ejs": "^3.1.9
-  express": "^4.18.2
-  jsonschema": "^1.4.1
-  jsonwebtoken": "^9.0.2
-  mysql": "^2.18.1
-  nodemon": "^3.0.1
-  passport": "^0.6.0
-  passport-jwt": "^4.0.1
-  react-chartjs-2": "^5.2.0
-  sequelize": "^6.33.0
-  sequelize-cli": "^6.6.1
-  uuid": "^9.0.1
+- faker-js/faker": "^8.2.0
+- bcrypt": "^5.1.1
+- chart.js": "^4.4.0
+- cors": "^2.8.5
+- dotenv": "^16.3.1
+- ejs": "^3.1.9
+- express": "^4.18.2
+- jsonschema": "^1.4.1
+- jsonwebtoken": "^9.0.2
+- mysql": "^2.18.1
+- nodemon": "^3.0.1
+- passport": "^0.6.0
+- passport-jwt": "^4.0.1
+- react-chartjs-2": "^5.2.0
+- sequelize": "^6.33.0
+- sequelize-cli": "^6.6.1
+- uuid": "^9.0.1
 
 ## Instalação e Configuração
 
@@ -72,81 +72,83 @@ Gestão de Artigos e Encomendas: Permite o registo e a consulta de artigos, incl
 
 - Migrações devido as necessidades das tabelas ordem é:
 
-1- npx sequelize db:migrate --name 20231025003338-create-usertype.js
-2- npx sequelize db:migrate --name 20231027123807-create-tipopagamento.js
-3- npx sequelize db:migrate --name 20231027123750-create-status.js
-4- npx sequelize db:migrate --name 20231106165811-create-fornecedorartigos.js
-5- npx sequelize db:migrate --name 20231025202920-create-clientes.js
-6- npx sequelize db:migrate --name 20231025204853-create-transportadora.js
-7- npx sequelize db:migrate --name 20231106154749-create-artigos.js
-8- npx sequelize db:migrate --name 20231106154126-create-armazem.js
-9- npx sequelize db:migrate , migrar o restante das migrações.
-11 -nodemon src/server.js - arrancar servidor
+- npx sequelize db:migrate --name 20231025003338-create-usertype.js
+- npx sequelize db:migrate --name 20231027123807-create-tipopagamento.js
+- npx sequelize db:migrate --name 20231027123750-create-status.js
+- npx sequelize db:migrate --name 20231106165811-create-fornecedorartigos.js
+- npx sequelize db:migrate --name 20231025202920-create-clientes.js
+- npx sequelize db:migrate --name 20231025204853-create-transportadora.js
+- npx sequelize db:migrate --name 20231106154749-create-artigos.js
+- npx sequelize db:migrate --name 20231106154126-create-armazem.js
+- npx sequelize db:migrate , migrar o restante das migrações.
+- nodemon src/server.js - arrancar servidor
 
 Opção 2 :
 
--Dump da base de dados mais pratico :)
+- Dump da base de dados mais pratico :)
 
 ## Uso da Aplicação
 
-1- Versão V.1.
-1.1- Versao actual.
-1.2- Criação de artigos associados ao armazem e fornecedor .
-1.3- Gestão de entregas com data de entrega e relatorio.
-1.4- Compra de artigos
-1.5- Edição perfil , fornecedor, clientes , transportadora .
-1.6- Artigos com stock associados ao armazem.
-1.7- Bloquear cliente e fornecedor .
+- Versão V.1.
+- Versao actual.
+- Criação de artigos associados ao armazem e fornecedor .
+- Gestão de entregas com data de entrega e relatorio.
+- Compra de artigos
+- Edição perfil , fornecedor, clientes , transportadora .
+- Artigos com stock associados ao armazem.
+- Bloquear cliente e fornecedor .
 
 ## Documentação da API
 
-1- Deixei um ficheiro do postman com toda informação das api, mas deixo aqui uma breve informação.
+- Deixei um ficheiro do postman com toda informação das api, mas deixo aqui uma breve informação.
 
 Clientes :
-1 - end point - http://127.0.0.1:3000/create
-Logica
-{
-"username": "teste",
-"email": "email@gmail.com",
-"morada": "bairro nossa",
-"password":"12345",
-"nif": 999999990,
-"telefone": 0000000000,
-"localidade": "peso da régua",
-"codigoPostal": 5050,
-"userTypeId": 1
-}
-Fornecedores :
-1 - end point - http://127.0.0.1:3000/create
-Logica
-{
-"username": "teste",
-"email": "email@gmail.com",
-"morada": "bairro nossa",
-"password":"12345",
-"nif": 999999990,
-"telefone": 0000000000,
-"localidade": "peso da régua",
-"codigoPostal": 5050,
-"userTypeId": 2
-}
-Transportadora :
-1 - end point - http://127.0.0.1:3000/create
-Logica
-{
-"username": "teste",
-"email": "email@gmail.com",
-"morada": "bairro nossa",
-"password":"12345",
-"nif": 999999990,
-"telefone": 0000000000,
-"localidade": "peso da régua",
-"codigoPostal": 5050,
-"userTypeId": 3
-}
+
+- end point - http://127.0.0.1:3000/create
+- Logica
+  {
+  "username": "teste",
+  "email": "email@gmail.com",
+  "morada": "bairro nossa",
+  "password":"12345",
+  "nif": 999999990,
+  "telefone": 0000000000,
+  "localidade": "peso da régua",
+  "codigoPostal": 5050,
+  "userTypeId": 1
+  }
+  Fornecedores :
+- end point - http://127.0.0.1:3000/create
+  Logica
+  {
+  "username": "teste",
+  "email": "email@gmail.com",
+  "morada": "bairro nossa",
+  "password":"12345",
+  "nif": 999999990,
+  "telefone": 0000000000,
+  "localidade": "peso da régua",
+  "codigoPostal": 5050,
+  "userTypeId": 2
+  }
+  Transportadora :
+- end point - http://127.0.0.1:3000/create
+  Logica
+  {
+  "username": "teste",
+  "email": "email@gmail.com",
+  "morada": "bairro nossa",
+  "password":"12345",
+  "nif": 999999990,
+  "telefone": 0000000000,
+  "localidade": "peso da régua",
+  "codigoPostal": 5050,
+  "userTypeId": 3
+  }
 
 Login :
-1 - end point - http://127.0.0.1:3000/sessao
+
+- end point - http://127.0.0.1:3000/sessao
 
 dados {
 "message": "Login bem-sucedido.",
@@ -155,7 +157,8 @@ dados {
 }
 
 Mudar Password :
-1 - end point - http://127.0.0.1:3000/mudarpass
+
+- end point - http://127.0.0.1:3000/mudarpass
 
 {
 "oldPassword": "12345",
@@ -168,76 +171,76 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjM
 }
 Aqui o token identifica o user login :)
 
-Varios - Clientes
+- Varios - Clientes
 
-1-http://127.0.0.1:3000/todosClientes method -Get
-2-http://127.0.0.1:3000/clientes/3 (id) method -Get
-3-http://127.0.0.1:3000/updateClientes/5(id) method - Put
-4-http://127.0.0.1:3000/clientes/7/desativar method - Put
-5-http://127.0.0.1:3000/clientes/7/activar method - Put
+- http://127.0.0.1:3000/todosClientes method -Get
+- http://127.0.0.1:3000/clientes/3 (id) method -Get
+- http://127.0.0.1:3000/updateClientes/5(id) method - Put
+- http://127.0.0.1:3000/clientes/7/desativar method - Put
+- http://127.0.0.1:3000/clientes/7/activar method - Put
 
 Varios - Fornecedores Optei por fazer diferente atravez do Token .
 
-1- http://127.0.0.1:3000/todosFornecedores method - Get
-2- http://127.0.0.1:3000/fornecedores method -Get atravez do token gerado pelo login :)
-3- http://127.0.0.1:3000/fornecedoreseditar method -Put atravez do token gerado pelo login :)
-dados {
-"username": "Antonio Mesquita",
-"email": "carretas33@gmail.com",
-"nif": 999999990,
-"telefone": 936637830,
-"password":"12345",
-"localidade": "peso da régua",
-"codigoPostal": 5050,
-"usertype": 2
-}
-4- http://127.0.0.1:3000/fornecedor/3/desativar method - Put
-5- http://127.0.0.1:3000/fornecedor/3/ativar method - Put
+- http://127.0.0.1:3000/todosFornecedores method - Get
+- http://127.0.0.1:3000/fornecedores method -Get atravez do token gerado pelo login :)
+- http://127.0.0.1:3000/fornecedoreseditar method -Put atravez do token gerado pelo login :)
+  dados {
+  "username": "Antonio Mesquita",
+  "email": "carretas33@gmail.com",
+  "nif": 999999990,
+  "telefone": 936637830,
+  "password":"12345",
+  "localidade": "peso da régua",
+  "codigoPostal": 5050,
+  "usertype": 2
+  }
+  4- http://127.0.0.1:3000/fornecedor/3/desativar method - Put
+  5- http://127.0.0.1:3000/fornecedor/3/ativar method - Put
 
-Artigos :
+- Artigos :
 
-1-http://127.0.0.1:3000/artigosF method -Get
-2-http://127.0.0.1:3000/artigodata method get Desc
-3-http://127.0.0.1:3000/criarartigo method Post
-Dados {
-"nome": "lampada 99",
-"descricao": "Descrição do Artigo de post",
-"preco": 10.99,
-"armazemId": 1,
-"stock": 100
-}
-Bearer Token
-requersitos : Token {
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
-}
+- http://127.0.0.1:3000/artigosF method -Get
+- http://127.0.0.1:3000/artigodata method get Desc
+- http://127.0.0.1:3000/criarartigo method Post
+  Dados {
+  "nome": "lampada 99",
+  "descricao": "Descrição do Artigo de post",
+  "preco": 10.99,
+  "armazemId": 1,
+  "stock": 100
+  }
+  Bearer Token
+  requersitos : Token {
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+  }
 
-4-http://127.0.0.1:3000/artigoarmazemstock/5 method -Get
-5-http://127.0.0.1:3000/artigomaisvendido method - Get
+- http://127.0.0.1:3000/artigoarmazemstock/5 method -Get
+- http://127.0.0.1:3000/artigomaisvendido method - Get
 
-Encomendas
-1-http://127.0.0.1:3000/todasemcomendas - Aqui encomendas Pendentes method - Get
-2 -http://127.0.0.1:3000/documentoencomenda/1 encomendas por cliente ID method - Get
-Bearer Token
-requersitos : Token {
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
-}
+- Encomendas
+- http://127.0.0.1:3000/todasemcomendas - Aqui encomendas Pendentes method - Get
+- http://127.0.0.1:3000/documentoencomenda/1 encomendas por cliente ID method - Get
+  Bearer Token
+  requersitos : Token {
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+  }
 
-3- http://127.0.0.1:3000/encomendasentregues encomendas entregues method - Get
-Bearer Token
-requersitos : Token {
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
-}
+- http://127.0.0.1:3000/encomendasentregues encomendas entregues method - Get
+  Bearer Token
+  requersitos : Token {
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+  }
 
-4- http://127.0.0.1:3000/encomenda Criar encomenda method -Post
-Bearer Token
-requersitos : Token {
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
-}
-5- http://127.0.0.1:3000/documentoencomenda/1 encomenda data por ID cliente :) method -Get
-Bearer Token
-requersitos : Token {
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
-}
+- http://127.0.0.1:3000/encomenda Criar encomenda method -Post
+  Bearer Token
+  requersitos : Token {
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+  }
+- http://127.0.0.1:3000/documentoencomenda/1 encomenda data por ID cliente :) method -Get
+  Bearer Token
+  requersitos : Token {
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+  }
 
 ## Contribuições / Site Online
 
@@ -284,9 +287,9 @@ https://github.com/PedroSilvaSilva
 
 ## Manutenção e Actualizações
 
-2- Versão v.2, Novas Fucnionalidades.
-2.1- Possobilidade de gestão de armazens , organização de Administrador.
-2.2- Criação de contas com autenticação de dois fatores.
-2.3- Criação de resportes personalizados .
-2.4- Gestão de produtos entre gestão de numeros serie e familias.
-2.5- Criação do Modulo inventarios .
+- Versão v.2, Novas Fucnionalidades.
+- Possobilidade de gestão de armazens , organização de Administrador.
+- Criação de contas com autenticação de dois fatores.
+- Criação de resportes personalizados .
+- Gestão de produtos entre gestão de numeros serie e familias.
+- Criação do Modulo inventarios .
