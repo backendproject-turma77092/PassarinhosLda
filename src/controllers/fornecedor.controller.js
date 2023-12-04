@@ -3,7 +3,6 @@ const {
   tipopagamento,
   status,
   usertype,
-  transportadora,
 } = require("../database/models");
 const { Sequelize } = require("sequelize");
 class FornecerdorController {
@@ -56,7 +55,7 @@ class FornecerdorController {
     }
   }
 
-  //aqui e transferido por token uuid :)
+  //aqui e transferido por token uuid :) tanto cliente como fornecedor mix :)
   async findFornecedorByToken(req, res) {
     try {
       const userResult = req.user;
@@ -64,8 +63,13 @@ class FornecerdorController {
       if (!userResult) {
         return res.status(404).json({ message: "perfil não encontrado." });
       }
+      const perfil = {
+        nome: userResult.username,
+        email: userResult.email,
+        nif: userResult.nif,
+      };
 
-      res.status(200).json({ perfil: userResult });
+      res.status(200).json({ perfil });
     } catch (error) {
       console.error("Erro ao carregar perfil:", error);
       res.status(500).json({ error: "Ocorreu um erro ao carregar o  perfil." });

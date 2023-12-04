@@ -12,14 +12,21 @@ const artigosFornecedor = require("../src/controllers/artigos.fornecedor.control
 const login = require("../src/controllers/login.controller");
 const encomenda = require("../src/controllers/encomendaartigos.controller");
 const documento = require("../src/controllers/encomenda.controller");
-
+const mudar = require("../src/controllers/mudarpassword.controller");
+const artigodata = require("../src/controllers/artgigosespecificos.controller");
 //documentação
 routes.get("/documentation", documentacaoController.renderDocumentation);
 
 //registro
-// routes.post("/create", schemavalidador(validador), reg.register);
+
 routes.post("/create", reg.register);
 routes.post("/sessao", login.login);
+routes.put(
+  "/mudarpass",
+  passport.authenticate("jwt", { session: false }),
+  mudar.changePassword
+);
+
 //rota clientes
 routes.get("/todosClientes", clientes.getAll);
 routes.get("/clientes/:id", clientes.findClienteById);
@@ -31,6 +38,9 @@ routes.get("/encomendaclientes/:clienteId", clientes.getClienteComEncomendas);
 
 //rota fornecedores
 routes.get("/todosFornecedores", fornecedores.getAll);
+routes.put("/fornecedor/:id/desativar", fornecedores.desativarFornecedor);
+routes.put("/fornecedor/:id/activar", fornecedores.activarFornecedor);
+routes.delete("/deletefornecedor/:id/", fornecedores.deleteFornecedor);
 routes.get(
   "/fornecedores",
   passport.authenticate("jwt", { session: false }),
@@ -47,10 +57,6 @@ routes.get(
   artigosFornecedor.getArtigosByFornecedorIdFromToken
 );
 
-routes.put("/fornecedor/:id/desativar", fornecedores.desativarFornecedor);
-routes.put("/fornecedor/:id/activar", fornecedores.activarFornecedor);
-routes.delete("/deletefornecedor/:id/", fornecedores.deleteFornecedor);
-
 routes.get(
   "/perfil",
   passport.authenticate("jwt", { session: false }),
@@ -62,7 +68,7 @@ routes.get("/todosgestores", gestor.getAll);
 
 //artigos fornecedor
 routes.get("/artigosF", artigosFornecedor.getAll);
-// routes.post("/createArtigo", artigosFornecedor.create);
+
 routes.post(
   "/criarartigo",
   passport.authenticate("jwt", { session: false }),
@@ -70,15 +76,21 @@ routes.post(
 );
 
 //encomenda
-routes.post(
-  "/encomenda",
-  // passport.authenticate("jwt", { session: false }),
-  encomenda.criarEncomenda
-);
+routes.post("/encomenda", encomenda.criarEncomenda);
 routes.get(
   "/documentoencomenda",
   passport.authenticate("jwt", { session: false }),
   documento.getEncomendasComDetalhes
+);
+routes.get(
+  "/documentoencomenda/:id",
+  passport.authenticate("jwt", { session: false }),
+  documento.getEncomendasComDetalhes
+);
+routes.get(
+  "/documentoencomenda/:id",
+  passport.authenticate("jwt", { session: false }),
+  documento.listarEncomendasPorClienteComDataEntrega
 );
 routes.get(
   "/todasemcomendas",
@@ -95,6 +107,11 @@ routes.put(
   passport.authenticate("jwt", { session: false }),
   documento.updateEncomenda
 );
+
+//artigos data desc e stock
+routes.get("/artigodata", artigodata.listarArtigosPorData);
+routes.get("/artigoarmazemstock/:artigoId", artigodata.consultarStockArtigo);
+routes.get("/artigomaisvendido", artigodata.artigoMaisEncomendado);
 
 routes.post("/artigoarmazem", artigosFornecedor.adicionarArtigoAoArmazem);
 

@@ -126,6 +126,30 @@ class EncomendasController {
       res.status(500).json({ error: "Erro interno do servidor" });
     }
   }
+  async listarEncomendasPorClienteComDataEntrega(req, res) {
+    try {
+      const clienteId = req.params.clienteId;
+
+      const encomendasDoCliente = await Encomenda.findAll({
+        where: { clienteId: clienteId },
+        attributes: ["id", "dataEncomenda", "status", "total", "dataEntrega"],
+      });
+
+      if (encomendasDoCliente.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "Nenhuma encomenda encontrada para o cliente." });
+      }
+
+      res.json(encomendasDoCliente);
+    } catch (error) {
+      console.error(
+        "Erro ao listar encomendas por cliente com data de entrega:",
+        error
+      );
+      res.status(500).json({ error: "Erro interno do servidor." });
+    }
+  }
 }
 
 module.exports = new EncomendasController();

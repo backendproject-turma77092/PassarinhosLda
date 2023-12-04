@@ -31,6 +31,10 @@ Daí muitas das minha tabelas serem no plurar .
 ## Apresentação do Projecto
 
 Este projecto envolve o desenvolvimento do backend para um software de logística destinado à empresa Passarinhos , Lda, que se dedica à compra e venda de material electrónico e de iluminação. O objectivo é digitalizar e optimizar a gestão de stocks, fornecedores e clientes da empresa.
+Autenticação Segura: Utiliza JWT (JSON Web Tokens) e Passport para garantir um processo de login seguro. Cada sessão de login gera um novo tokenIdentifier, aumentando a segurança.
+Criptografia de Dados Sensíveis: Os dados sensíveis dos clientes e fornecedores são criptografados para proteger a privacidade e a segurança.
+Gestão de Utilizadores: Suporta diferentes tipos de utilizadores como clientes, fornecedores e transportadoras, cada um com as suas próprias funcionalidades e permissões.
+Gestão de Artigos e Encomendas: Permite o registo e a consulta de artigos, incluindo informações sobre stock e vendas, além da gestão completa de encomendas, desde a criação até à entrega.
 
 ## Funcionalidades
 
@@ -77,8 +81,11 @@ Este projecto envolve o desenvolvimento do backend para um software de logístic
 7- npx sequelize db:migrate --name 20231106154749-create-artigos.js
 8- npx sequelize db:migrate --name 20231106154126-create-armazem.js
 9- npx sequelize db:migrate , migrar o restante das migrações.
-10- npx sequelize db:seed:undo:all , preenche as colunas necessarias para funcionamento da aplicação
 11 -nodemon src/server.js - arrancar servidor
+
+Opção 2 :
+
+-Dump da base de dados mais pratico :)
 
 ## Uso da Aplicação
 
@@ -90,13 +97,161 @@ Este projecto envolve o desenvolvimento do backend para um software de logístic
 1.5- Edição perfil , fornecedor, clientes , transportadora .
 1.6- Artigos com stock associados ao armazem.
 1.7- Bloquear cliente e fornecedor .
-1.8 - Grafico com estatisticas de entregas pela transportadora.
 
 ## Documentação da API
 
-Em construção
+1- Deixei um ficheiro do postman com toda informação das api, mas deixo aqui uma breve informação.
 
-## Contribuições
+Clientes :
+1 - end point - http://127.0.0.1:3000/create
+Logica
+{
+"username": "teste",
+"email": "email@gmail.com",
+"morada": "bairro nossa",
+"password":"12345",
+"nif": 999999990,
+"telefone": 0000000000,
+"localidade": "peso da régua",
+"codigoPostal": 5050,
+"userTypeId": 1
+}
+Fornecedores :
+1 - end point - http://127.0.0.1:3000/create
+Logica
+{
+"username": "teste",
+"email": "email@gmail.com",
+"morada": "bairro nossa",
+"password":"12345",
+"nif": 999999990,
+"telefone": 0000000000,
+"localidade": "peso da régua",
+"codigoPostal": 5050,
+"userTypeId": 2
+}
+Transportadora :
+1 - end point - http://127.0.0.1:3000/create
+Logica
+{
+"username": "teste",
+"email": "email@gmail.com",
+"morada": "bairro nossa",
+"password":"12345",
+"nif": 999999990,
+"telefone": 0000000000,
+"localidade": "peso da régua",
+"codigoPostal": 5050,
+"userTypeId": 3
+}
+
+Login :
+1 - end point - http://127.0.0.1:3000/sessao
+
+dados {
+"message": "Login bem-sucedido.",
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjA1Y2Q5YWJjLWY5MWItNGVjMi1iNTMwLTdhNjU0YTM2ZmY2YiIsInVzZXJUeXBlSWQiOiJjbGllbnRlIiwiaWF0IjoxNzAxNzI0MjE2LCJleHAiOjE3MDE3Mjc4MTZ9.ZD7T4taeG3R1Jecvhty8CmMss4vqSQzVpcyLJ5cnl4A",
+"userId": 1
+}
+
+Mudar Password :
+1 - end point - http://127.0.0.1:3000/mudarpass
+
+{
+"oldPassword": "12345",
+"newPassword": "123456"
+
+}
+Bearer Token
+requersitos : Token {
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+}
+Aqui o token identifica o user login :)
+
+Varios - Clientes
+
+1-http://127.0.0.1:3000/todosClientes method -Get
+2-http://127.0.0.1:3000/clientes/3 (id) method -Get
+3-http://127.0.0.1:3000/updateClientes/5(id) method - Put
+4-http://127.0.0.1:3000/clientes/7/desativar method - Put
+5-http://127.0.0.1:3000/clientes/7/activar method - Put
+
+Varios - Fornecedores Optei por fazer diferente atravez do Token .
+
+1- http://127.0.0.1:3000/todosFornecedores method - Get
+2- http://127.0.0.1:3000/fornecedores method -Get atravez do token gerado pelo login :)
+3- http://127.0.0.1:3000/fornecedoreseditar method -Put atravez do token gerado pelo login :)
+dados {
+"username": "Antonio Mesquita",
+"email": "carretas33@gmail.com",
+"nif": 999999990,
+"telefone": 936637830,
+"password":"12345",
+"localidade": "peso da régua",
+"codigoPostal": 5050,
+"usertype": 2
+}
+4- http://127.0.0.1:3000/fornecedor/3/desativar method - Put
+5- http://127.0.0.1:3000/fornecedor/3/ativar method - Put
+
+Artigos :
+
+1-http://127.0.0.1:3000/artigosF method -Get
+2-http://127.0.0.1:3000/artigodata method get Desc
+3-http://127.0.0.1:3000/criarartigo method Post
+Dados {
+"nome": "lampada 99",
+"descricao": "Descrição do Artigo de post",
+"preco": 10.99,
+"armazemId": 1,
+"stock": 100
+}
+Bearer Token
+requersitos : Token {
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+}
+
+4-http://127.0.0.1:3000/artigoarmazemstock/5 method -Get
+5-http://127.0.0.1:3000/artigomaisvendido method - Get
+
+Encomendas
+1-http://127.0.0.1:3000/todasemcomendas - Aqui encomendas Pendentes method - Get
+2 -http://127.0.0.1:3000/documentoencomenda/1 encomendas por cliente ID method - Get
+Bearer Token
+requersitos : Token {
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+}
+
+3- http://127.0.0.1:3000/encomendasentregues encomendas entregues method - Get
+Bearer Token
+requersitos : Token {
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+}
+
+4- http://127.0.0.1:3000/encomenda Criar encomenda method -Post
+Bearer Token
+requersitos : Token {
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+}
+5- http://127.0.0.1:3000/documentoencomenda/1 encomenda data por ID cliente :) method -Get
+Bearer Token
+requersitos : Token {
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInRva2VuSWRlbnRpZmllciI6IjMxY2FhYzJjLTk3ZDAtNDY0Mi1hNDBmLTU4ZTRjZWU5OTk3ZiIsInVzZXJUeXBlSWQiOiJmb3JuZWNlZG9yIiwiaWF0IjoxNzAxNzE5Nzc2LCJleHAiOjE3MDE3MjMzNzZ9.oyRy8YVbGF39e3zvXmFjD-BIPUjv60jeCQqP0uJ8zM0
+}
+
+## Contribuições / Site Online
+
+https://schedulecreation.com/
+
+Logins
+Cliente - carretas2@gmail.com
+Pw- 12345
+
+Fornecedor - carretas90@gmail.com
+Pw- 12345
+
+Transportadora - carretastrsn@gmail.com
+Pw- 12345
 
 https://github.com/PedroSilvaSilva
 
@@ -134,4 +289,4 @@ https://github.com/PedroSilvaSilva
 2.2- Criação de contas com autenticação de dois fatores.
 2.3- Criação de resportes personalizados .
 2.4- Gestão de produtos entre gestão de numeros serie e familias.
-2.5- Criaçã do Modulo inventarios .
+2.5- Criação do Modulo inventarios .

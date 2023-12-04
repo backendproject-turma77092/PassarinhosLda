@@ -60,13 +60,15 @@ class ClientesController {
   async findClienteById(req, res) {
     try {
       const { id } = req.params;
-      const cliente = await clientes.findByPk(id);
+      const cliente = await clientes.findByPk(id, {
+        attributes: ["username", "email", "nif", "telefone", "localidade"],
+      });
       if (!cliente) {
         return res.status(404).json({ message: "ID não encontrado." });
       }
       res.status(200).json({ cliente });
     } catch (error) {
-      console.error("Erro ao carregar clientes:", error);
+      console.error("Erro ao carregar cliente:", error);
       res.status(500).json({ error: "Ocorreu um erro ao carregar o cliente." });
     }
   }
